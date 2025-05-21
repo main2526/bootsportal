@@ -26,18 +26,26 @@ export default function TarjetasDescargas() {
       imagen: "/AfterEffects.png",
       archivo: "/aftereffects",
     },
-    
+    {
+      id: 3,
+      titulo: "Blox Fruits Stock",
+      descripcion:
+        "🔍 Consulta el stock de frutas en Blox Fruits sin abrir el navegador¿Estás cansado de tener que abrir el navegador, buscar páginas y perder tiempo solo para ver qué frutas hay disponibles en Blox Fruits? ¡Tenemos la solución perfecta para ti!Esta aplicación de escritorio está diseñada especialmente para jugadores de Blox Fruits que quieren estar siempre un paso adelante. Con esta herramienta, podrás consultar en tiempo real el stock de frutas sin necesidad de salir del escritorio de tu PC.",
+      imagen: "/blox.png",
+      archivo: "/bloxstock",
+    },
   ]
 
-  // State to track which cards have expanded descriptions
-  const [expandedCards, setExpandedCards] = useState<Record<number, boolean>>({})
+  // Individual expanded states for each card
+  const [expandedStates, setExpandedStates] = useState<boolean[]>(Array(tarjetas.length).fill(false))
 
-  // Toggle expanded state for a specific card
-  const toggleExpanded = (id: number) => {
-    setExpandedCards((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }))
+  // Toggle expanded state for a specific card by index
+  const toggleExpanded = (index: number) => {
+    setExpandedStates((prev) => {
+      const newStates = [...prev]
+      newStates[index] = !newStates[index]
+      return newStates
+    })
   }
 
   return (
@@ -98,7 +106,7 @@ export default function TarjetasDescargas() {
       </motion.div>
 
       {/* Cards grid with animations */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {tarjetas.map((tarjeta, index) => (
           <motion.div
             key={tarjeta.id}
@@ -126,17 +134,17 @@ export default function TarjetasDescargas() {
               <CardContent className="flex-grow p-6 bg-white/5 backdrop-blur-md">
                 <div className="space-y-4">
                   <CardDescription
-                    className={`text-sm leading-relaxed text-white ${expandedCards[tarjeta.id] ? "" : "line-clamp-3"}`}
+                    className={`text-sm leading-relaxed text-white ${expandedStates[index] ? "" : "line-clamp-3"}`}
                   >
                     {tarjeta.descripcion}
                   </CardDescription>
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => toggleExpanded(tarjeta.id)}
+                    onClick={() => toggleExpanded(index)}
                     className="text-xs text-blue-400 hover:text-blue-300 hover:bg-blue-950/20 px-2 py-1 h-auto"
                   >
-                    {expandedCards[tarjeta.id] ? (
+                    {expandedStates[index] ? (
                       <>
                         <ChevronUp className="h-3 w-3 mr-1" />
                         Leer menos
@@ -155,16 +163,16 @@ export default function TarjetasDescargas() {
                   className="w-full group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-none shadow-lg shadow-blue-700/20 hover:shadow-blue-700/40 transition-all duration-300"
                   asChild
                 >
-                  <Button  className="flex items-center justify-center">
+                  <Link href={tarjeta.archivo} className="flex items-center justify-center">
                     <motion.div
                       className="flex items-center justify-center"
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                     >
                       <Download className="mr-2 h-4 w-4 transition-all group-hover:animate-bounce" />
-                       <Link href={tarjeta.archivo}>Descargar</Link>
+                      Descargar
                     </motion.div>
-                  </Button>
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>

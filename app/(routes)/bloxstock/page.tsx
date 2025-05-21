@@ -2,14 +2,13 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-export default function Minecraft() {
+export default function BloxStock() {
   const [state, setState] = useState(false); // Controla si ya se habilitó el botón
   const [timer, setTimer] = useState<number | null>(null); // Controla el tiempo restante
 
-
   // Cargar estado guardado
   useEffect(() => {
-    const isSubscribed = localStorage.getItem("isSubscribedMinecraftJava") === "true";
+    const isSubscribed = localStorage.getItem("isSubscribedBlox1x") === "true";
     setState(isSubscribed);
   }, []);
 
@@ -22,7 +21,7 @@ export default function Minecraft() {
       }, 1000);
     } else if (timer === 0) {
       setState(true);
-      localStorage.setItem("isSubscribedMinecraftJava", "true");
+      localStorage.setItem("isSubscribedBlox1x", "true");
       setTimer(null);
     }
     return () => clearInterval(interval);
@@ -66,7 +65,7 @@ export default function Minecraft() {
             disabled={!state}
             onClick={() =>
               (window.location.href =
-                "https://www.mediafire.com/file/ifoghefh0ytur21")
+                "https://www.mediafire.com/file/afnn1x2ejb2xt4g/mirage-stock.rar/file")
             }
             className={`w-full py-3 rounded-sm font-semibold transition-all duration-300 ${
               state
