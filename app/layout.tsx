@@ -14,8 +14,8 @@ export default function RootLayout({
       <body className={`$ antialiased  bg-black h-full overflow-hidden`}>
         <Link href={"/"}>
           <div className="fixed top-0 left-0 w-full z-50 bg-opacity-80  flex items-center p-4">
-            <h1 className="text-white text-2xl shadow-white font-bold">Turtle</h1>
-            <h1 className="text-red-400 text-2xl ml-1 font-bold">BloxFruits</h1>
+            <h1 className="text-white text-2xl shadow-white font-bold">BootsDev</h1>
+            <h1 className="text-red-400 text-2xl ml-1 font-bold">-X</h1>
           </div>
         </Link>
 
